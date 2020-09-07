@@ -2,6 +2,7 @@ package mini.kafka.producer;
 
 import mini.kafka.exception.KafkaException;
 import mini.kafka.repo.MessageRepo;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
