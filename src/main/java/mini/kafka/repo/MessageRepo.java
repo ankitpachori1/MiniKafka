@@ -36,4 +36,14 @@ public class MessageRepo {
         data.put(topic, new HashMap<>());
     }
 
+    public JSONObject consume(String topic, Integer offset) throws KafkaException{
+        if(!data.containsKey(topic)){
+            throw new KafkaException(ExceptionDesc.TOPIC_NOT_PRESENT);
+        }
+        if(!data.get(topic).containsKey(offset)){
+            throw new KafkaException(ExceptionDesc.WRONG_OFFSET_REQUESTED);
+        }
+        return data.get(topic).get(offset).getObject();
+    }
+
 }
