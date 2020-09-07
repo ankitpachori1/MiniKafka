@@ -1,0 +1,2 @@
+# MiniKafka
+Mini Kafka - experiment
