@@ -1,11 +1,15 @@
 package mini.kafka.consumer;
 
+import com.google.gson.Gson;
 import mini.kafka.exception.KafkaException;
 import mini.kafka.model.ConsumerResponse;
 import mini.kafka.repo.MessageRepo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class Consumer implements IConsumer {
@@ -16,6 +20,7 @@ public class Consumer implements IConsumer {
     @Override
     public ConsumerResponse consume(String topic, Integer offset) throws KafkaException {
         JSONObject jsonObject = repo.consume(topic, offset);
-        return new ConsumerResponse(jsonObject, null, null);
+        Map<String, Object> json =  new Gson().fromJson(jsonObject.toString(), HashMap.class);
+        return new ConsumerResponse(json);
     }
 }

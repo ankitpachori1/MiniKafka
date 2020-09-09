@@ -3,7 +3,6 @@ package mini.kafka.controller;
 import mini.kafka.consumer.Consumer;
 import mini.kafka.exception.KafkaException;
 import mini.kafka.model.ConsumerResponse;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +21,11 @@ public class ConsumerController {
         ConsumerResponse response;
         try{
             response = consumer.consume(topic,offset);
-            return new ResponseEntity<>(response,HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         catch (KafkaException e){
-            response = new ConsumerResponse(null, 400, e.exceptionDesc.name());
-            return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+            response = new ConsumerResponse(400, e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 
